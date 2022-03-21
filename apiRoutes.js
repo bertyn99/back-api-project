@@ -1,5 +1,5 @@
 const express = require("express");
-const user = require("./routes/user");
+const user = require("./controller/user");
 const verifyToken = require("./services/verifyToken");
 
 exports.router = (function () {
