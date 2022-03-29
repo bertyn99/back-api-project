@@ -23,17 +23,17 @@ exports.router = (function () {
   apiRouter.route("/user/:id/edit").patch(verifyToken, user.updateInfo);
 
   /*  
- 
    // info user
    apiRouter.route("/info/:id").get(verifyToken, user.infoUser);
- 
-   
- 
    // lost password - client
    apiRouter.route("/lost").post(user.lostPassword);
  
    // lost password - website
    apiRouter.route("/lost/reset").post(user.resetPassword); */
+
+  //products routes
+
+  //invoices routes
 
   return apiRouter;
 })();
