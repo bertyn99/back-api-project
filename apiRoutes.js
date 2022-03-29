@@ -1,7 +1,8 @@
 const express = require("express");
 const user = require("./controller/userController");
 const verifyToken = require("./services/verifyToken");
-
+const products = require("./controller/productControllers");
+const invoice = require("./controller/factureController");
 exports.router = (function () {
   let apiRouter = express.Router();
   // register user
@@ -32,8 +33,18 @@ exports.router = (function () {
    apiRouter.route("/lost/reset").post(user.resetPassword); */
 
   //products routes
-
+  apiRouter.route("/products").get(products.index);
+  apiRouter.route("/products/:id").get(products.getByProductId);
+  apiRouter.route("/products/:id/edit").patch(products.updateProduct);
+  apiRouter.route("/products/:id/delete").delete(products.deleteProduct);
+  apiRouter.route("/products/:id/add").post(products.addProduct);
   //invoices routes
+  apiRouter.route("/invoices").get(invoice.index);
+  apiRouter.route("/invoices/:id").get(invoice.getByInvoiceId);
+  apiRouter.route("/invoices/user/:id").get(invoice.getByInvoiceUserId);
+  apiRouter.route("/invoices/:id/edit").patch(invoice.updateInvoice);
+  apiRouter.route("/invoices/:id/delete").delete(invoice.deleteInvoice);
+  apiRouter.route("/invoices/:id/add").post(invoice.addInvoice);
 
   return apiRouter;
 })();
