@@ -1,32 +1,34 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
-const validator = require('validator')
+const validator = require("validator");
 
-let productSchema = new Schema({
+let productSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
     stock: {
-        type: int,
-        required: true,
+      type: Number,
+      required: true,
     },
     cover: {
-        data: Buffer,
-        contentType: String
+      data: Buffer,
+      contentType: String,
     },
     price: {
-        type: decimal,
-        required: true,
-    }
+      type: mongoose.Decimal128,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-}, {
-    timestamps: true
-});
-
-const Product = mongoose.model('Product', productSchema)
+const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

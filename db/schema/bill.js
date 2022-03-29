@@ -1,39 +1,44 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
-const validator = require('validator')
+const validator = require("validator");
 
-let billSchema = new Schema({
+let billSchema = new Schema(
+  {
     idUser: {
-        type: mongoose.ObjectId,
-        required: true,
-        ref: 'User'
+      type: mongoose.ObjectId,
+      required: true,
+      ref: "User",
     },
     emissionDate: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
     },
     isPaid: {
-        type: bool,
-        required: true,
+      type: Boolean,
+      required: true,
     },
     paidDate: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
     },
     price: {
-        type: decimal,
-        required: true,
+      type: mongoose.Decimal128,
+      required: true,
     },
-    products: [{
+    products: [
+      {
         type: mongoose.ObjectId,
-        ref: 'Product'
-    }]
-}, {
-    timestamps: true
-});
+        ref: "Product",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Bill = mongoose.model('Bill', billSchema)
+const Bill = mongoose.model("Bill", billSchema);
 
 module.exports = Bill;
