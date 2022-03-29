@@ -1,7 +1,7 @@
 const express = require("express");
 const user = require("./controller/userController");
 const verifyToken = require("./services/verifyToken");
-const products = require("./controller/productControllers");
+const products = require("./controller/productController");
 const invoice = require("./controller/factureController");
 exports.router = (function () {
   let apiRouter = express.Router();
@@ -40,8 +40,8 @@ exports.router = (function () {
   apiRouter.route("/products/:id/add").post(products.addProduct);
   //invoices routes
   apiRouter.route("/invoices").get(invoice.index);
-  apiRouter.route("/invoices/:id").get(invoice.getByInvoiceId);
-  apiRouter.route("/invoices/user/:id").get(invoice.getByInvoiceUserId);
+  apiRouter.route("/invoices/:id").get(invoice.getInvoiceById);
+  apiRouter.route("/invoices/user/:id").get(invoice.getInvoiceByUserId);
   apiRouter.route("/invoices/:id/edit").patch(invoice.updateInvoice);
   apiRouter.route("/invoices/:id/delete").delete(invoice.deleteInvoice);
   apiRouter.route("/invoices/:id/add").post(invoice.addInvoice);
