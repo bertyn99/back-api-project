@@ -13,7 +13,7 @@ async function register(req, res) {
     await user.save();
     //envoyer l'email de confirmation de création de compte
     const token = await user.generateAuthToken();
-    console.log({ user, token });
+
     res.status(200).send({ user, token });
   } catch (e) {
     console.log(e);
@@ -27,9 +27,11 @@ async function logIn(req, res) {
       req.body.email,
       req.body.password
     );
+
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (e) {
+    console.log(e);
     res.status(400).send(e);
   }
 }
