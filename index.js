@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use("/api", apiRouter);
 app.listen(config.PORT, () => {
   console.log(`Application listening on port ${config.PORT}!`);
 });
