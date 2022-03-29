@@ -5,7 +5,6 @@
 const mongoose = require("mongoose");
 const db = require("../config");
 mongoose.connect(db.DBURL, {
-  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
