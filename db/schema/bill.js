@@ -8,7 +8,7 @@ let billSchema = new Schema({
     idUser: {
         type: mongoose.ObjectId,
         required: true,
-        ref: 'user'
+        ref: 'User'
     },
     emissionDate: {
         type: Date,
@@ -26,7 +26,10 @@ let billSchema = new Schema({
         type: decimal,
         required: true,
     },
-    products: [{ type: mongoose.ObjectId }]
+    products: [{
+        type: mongoose.ObjectId,
+        ref: 'Product'
+    }]
 }, {
     timestamps: true
 });
