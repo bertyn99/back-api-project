@@ -16,8 +16,8 @@ let productSchema = new Schema(
       required: true,
     },
     cover: {
-      data: Buffer,
-      contentType: String,
+      type: String,
+      required: true,
     },
     price: {
       type: mongoose.Decimal128,
