@@ -40,17 +40,18 @@ async function getInvoiceByUserId(req, res) {
 }
 async function addInvoice(req, res) {
   try {
-    const invoice = await Bill.insertOne({
-      idUser: req.idUser,
-      emissionDate: req.emissionDate,
-      isPaid: req.isPaid,
-      paidDate: req.paidDate,
-      price: req.price,
-      products: req.products,
+    const invoice = new Bill({
+      idUser: req.body.idUser,
+      emissionDate: req.body.emissionDate,
+      isPaid: req.body.isPaid,
+      paidDate: req.body.paidDate,
+      price: req.body.price,
+      products: req.body.products,
     });
     if (!invoice) {
       return res.status(200).send("There is no Invoice with this Id");
     }
+    await invoice.save();
     res.status(200).send({ msg: "Invoice inserted", invoice });
   } catch (error) {
     res.status(404).send("This is error: " + error);
