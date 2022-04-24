@@ -1,6 +1,7 @@
 // product Controller
 
 const Product = require("../db/schema/product");
+const Serie = require("../db/schema/serie");
 const db = require("../db/connexion");
 
 async function index(req, res) {
@@ -30,7 +31,8 @@ async function getByProductId(req, res) {
 async function addProduct(req, res) {
   try {
     const product = new Product({
-      name: req.body.name,
+      serie: req.body.serie,
+      number: req.body.number,
       stock: req.body.stock,
       cover: req.body.cover,
       price: req.body.price,
@@ -75,10 +77,23 @@ async function deleteProduct(req, res) {
     res.status(404).send("This is error: " + error);
   }
 }
+async function findSerie(req, res) {
+  try {
+    const serie = await Serie.find({ name: req.body.serie });
+
+    if (!serie) {
+      return res.status(202).send("There is no Serie with this Name");
+    }
+    res.status(200).send(serie);
+  } catch (error) {
+    res.status(404).send("This is error: " + error);
+  }
+}
 module.exports = {
   index,
   getByProductId,
   addProduct,
   updateProduct,
   deleteProduct,
+  findSerie,
 };

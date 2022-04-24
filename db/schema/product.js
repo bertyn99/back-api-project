@@ -6,10 +6,13 @@ const validator = require("validator");
 
 let productSchema = new Schema(
   {
-    name: {
+    serie: {
       type: String,
       required: true,
-      trim: true,
+    },
+    number: {
+      type: Number,
+      required: true,
     },
     stock: {
       type: Number,

@@ -1,6 +1,7 @@
 // serie Controller
 
 const Serie = require("../db/schema/serie");
+const Product = require("../db/schema/product");
 const db = require("../db/connexion");
 
 async function index(req, res) {
@@ -72,10 +73,23 @@ async function deleteSerie(req, res) {
     res.status(404).send("This is error: " + error);
   }
 }
+async function findMangas(req, res) {
+  try {
+    const mangas = await Product.find({ serie: req.body.name });
+
+    if (!mangas) {
+      return res.status(202).send("There is no Mangas in this Serie");
+    }
+    res.status(200).send(mangas);
+  } catch (error) {
+    res.status(404).send("This is error: " + error);
+  }
+}
 module.exports = {
   index,
   getBySerieId,
   addSerie,
   updateSerie,
   deleteSerie,
+  findMangas,
 };
