@@ -30,6 +30,11 @@ let serieSchema = new Schema(
   }
 );
 
+serieSchema.virtual("volumes", {
+  ref: "Product",
+  foreignField: "serie",
+  localField: "_id",
+});
 const Serie = mongoose.model("Serie", serieSchema);
 
 module.exports = Serie;

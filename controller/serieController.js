@@ -18,12 +18,16 @@ async function index(req, res) {
 }
 async function getSerieById(req, res) {
   try {
-    const serie = await Serie.findById(req.params.id);
-
+    const serie = await Serie.findById(req.params.id); /* .populate({
+      path: "products",
+    }); */
+    const mangas = await Product.find({ serie: serie.id });
+    console.log(mangas);
     if (!serie) {
       return res.status(202).send("There is no Serie with this Id");
     }
-    res.status(200).send(serie);
+
+    res.status(200).send({ ...serie._doc, volumes: [...mangas] });
   } catch (error) {
     res.status(404).send("This is error: " + error);
   }
