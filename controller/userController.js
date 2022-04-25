@@ -13,8 +13,8 @@ async function register(req, res) {
     await user.save();
     //envoyer l'email de confirmation de création de compte
     const token = await user.generateAuthToken();
-
-    res.status(200).send({ user, token });
+    const { password, ...useWithoutPassword } = user;
+    res.status(200).send({ user: useWithoutPassword, token });
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
@@ -29,7 +29,8 @@ async function logIn(req, res) {
     );
 
     const token = await user.generateAuthToken();
-    res.send({ user, token });
+    const { password, ...useWithoutPassword } = user;
+    res.send({ user: useWithoutPassword, token });
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
@@ -52,7 +53,7 @@ async function myInfo(req, res) {
 
   try {
     const user = await User.findById(_id);
-    console.log(user);
+
     if (!user) {
       return res.status(404).send("This is a wrong id");
     }
