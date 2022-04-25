@@ -11,11 +11,7 @@ let serieSchema = new Schema(
       required: true,
       trim: true,
     },
-    numberBook: {
-      type: Number,
-      required: true,
-    },
-    picture: {
+    cover: {
       type: String,
       required: true,
     },
