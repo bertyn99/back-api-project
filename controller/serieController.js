@@ -29,11 +29,14 @@ async function getBySerieId(req, res) {
   }
 }
 async function addSerie(req, res) {
+  if (!req.user.isAdmin)
+    return res.status(401).send("Unauthorized to create a Serie");
+
   try {
     const serie = new Serie({
       name: req.body.name,
-      numberBook: req.body.numberBook,
-      picture: req.body.picture,
+      description: req.body.description,
+      cover: req.body.cover,
       author: req.body.author,
     });
     if (!serie) {

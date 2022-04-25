@@ -11,6 +11,11 @@ let serieSchema = new Schema(
       required: true,
       trim: true,
     },
+    description: {
+      type: String,
+      required: false,
+      default: "Pas encore de description",
+    },
     cover: {
       type: String,
       required: true,
