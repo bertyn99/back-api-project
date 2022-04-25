@@ -32,7 +32,6 @@ async function logIn(req, res) {
     const { password, ...useWithoutPassword } = user._doc;
     res.send({ user: useWithoutPassword, token });
   } catch (e) {
-    console.log(e);
     res.status(400).send(e);
   }
 }

@@ -46,7 +46,7 @@ exports.router = (function () {
 
   //serie routes
   apiRouter.route("/serie").get(serie.index);
-  apiRouter.route("/serie/:id").get(serie.getBySerieId);
+  apiRouter.route("/serie/:id").get(serie.getSerieById);
   apiRouter.route("/serie/:id/edit").patch(verifyToken, serie.updateSerie);
   apiRouter.route("/serie/:id/delete").delete(verifyToken, serie.deleteSerie);
   apiRouter.route("/serie").post(verifyToken, serie.addSerie);

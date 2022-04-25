@@ -16,9 +16,9 @@ async function index(req, res) {
     res.status(404).send("This is error: " + error);
   }
 }
-async function getBySerieId(req, res) {
+async function getSerieById(req, res) {
   try {
-    const serie = await Serie.findById(req.id);
+    const serie = await Serie.findById(req.params.id);
 
     if (!serie) {
       return res.status(202).send("There is no Serie with this Id");
@@ -68,13 +68,12 @@ async function deleteSerie(req, res) {
     return res.status(401).send("Unauthorized to delete a Serie");
   try {
     if (req.params.id) {
-      const serie = await Serie.deleteOne({
-        _id: req.id,
-      });
+      const serie = await Serie.deleteOne({ _id: req.params.id });
+      console.log(serie);
       if (!serie) {
         return res.status(200).send("There is no Serie with this Id");
       }
-      res.status(200).send({ msg: "Serie deleted", product });
+      res.status(200).send({ msg: "Serie deleted", serie });
     }
   } catch (error) {
     res.status(404).send("This is error: " + error);
@@ -94,7 +93,7 @@ async function findMangas(req, res) {
 }
 module.exports = {
   index,
-  getBySerieId,
+  getSerieById,
   addSerie,
   updateSerie,
   deleteSerie,
