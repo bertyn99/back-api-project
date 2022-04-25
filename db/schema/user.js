@@ -44,8 +44,6 @@ let userSchema = new Schema(
             */
       },
     },
-    firstname: { type: String, required: false },
-    lastname: { type: String, required: false },
     tokens: [
       {
         token: {

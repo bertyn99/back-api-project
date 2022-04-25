@@ -46,6 +46,8 @@ async function addSerie(req, res) {
   }
 }
 async function updateSerie(req, res) {
+  if (!req.user.isAdmin)
+    return res.status(401).send("Unauthorized to modify a Serie");
   try {
     if (req.params.id) {
       const serie = await Serie.findByIdAndUpdate(req.params.id, ...req.body);
@@ -59,6 +61,8 @@ async function updateSerie(req, res) {
   }
 }
 async function deleteSerie(req, res) {
+  if (!req.user.isAdmin)
+    return res.status(401).send("Unauthorized to delete a Serie");
   try {
     if (req.params.id) {
       const serie = await Serie.deleteOne({

@@ -29,6 +29,8 @@ async function getByProductId(req, res) {
   }
 }
 async function addProduct(req, res) {
+  if (!req.user.isAdmin)
+    return res.status(401).send("Unauthorized to create a Product");
   try {
     const product = new Product({
       serie: req.body.serie,
@@ -47,6 +49,8 @@ async function addProduct(req, res) {
   }
 }
 async function updateProduct(req, res) {
+  if (!req.user.isAdmin)
+    return res.status(401).send("Unauthorized to modify a Product");
   try {
     if (req.params.id) {
       const product = await Product.findByIdAndUpdate(
@@ -63,6 +67,8 @@ async function updateProduct(req, res) {
   }
 }
 async function deleteProduct(req, res) {
+  if (!req.user.isAdmin)
+    return res.status(401).send("Unauthorized to delete a Product");
   try {
     if (req.params.id) {
       const product = await Product.deleteOne({

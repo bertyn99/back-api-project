@@ -36,16 +36,21 @@ exports.router = (function () {
   //products routes
   apiRouter.route("/products").get(products.index);
   apiRouter.route("/products/:id").get(products.getByProductId);
-  apiRouter.route("/products/:id/edit").patch(products.updateProduct);
-  apiRouter.route("/products/:id/delete").delete(products.deleteProduct);
-  apiRouter.route("/products").post(products.addProduct);
+  apiRouter
+    .route("/products/:id/edit")
+    .patch(verifyToken, products.updateProduct);
+  apiRouter
+    .route("/products/:id/delete")
+    .delete(verifyToken, products.deleteProduct);
+  apiRouter.route("/products").post(verifyToken, products.addProduct);
 
   //serie routes
   apiRouter.route("/serie").get(serie.index);
   apiRouter.route("/serie/:id").get(serie.getBySerieId);
-  apiRouter.route("/serie/:id/edit").patch(serie.updateSerie);
-  apiRouter.route("/serie/:id/delete").delete(serie.deleteSerie);
-  apiRouter.route("/serie").post(serie.addSerie);
+  apiRouter.route("/serie/:id/edit").patch(verifyToken, serie.updateSerie);
+  apiRouter.route("/serie/:id/delete").delete(verifyToken, serie.deleteSerie);
+  apiRouter.route("/serie").post(verifyToken, serie.addSerie);
+
   //invoices routes
   apiRouter.route("/invoices").get(invoice.index);
   apiRouter.route("/invoices/:id").get(invoice.getInvoiceById);
