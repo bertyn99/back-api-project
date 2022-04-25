@@ -7,11 +7,11 @@ const validator = require("validator");
 let productSchema = new Schema(
   {
     serie: {
-      type: String,
+      type: mongoose.ObjectId,
       required: true,
       ref: "Serie",
     },
-    number: {
+    volume: {
       type: Number,
       required: true,
     },

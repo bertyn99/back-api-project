@@ -34,7 +34,7 @@ async function addProduct(req, res) {
   try {
     const product = new Product({
       serie: req.body.serie,
-      number: req.body.number,
+      volume: req.body.volume,
       stock: req.body.stock,
       cover: req.body.cover,
       price: req.body.price,
@@ -53,10 +53,9 @@ async function updateProduct(req, res) {
     return res.status(401).send("Unauthorized to modify a Product");
   try {
     if (req.params.id) {
-      const product = await Product.findByIdAndUpdate(
-        req.params.id,
-        ...req.body
-      );
+      const product = await Product.findByIdAndUpdate(req.params.id, {
+        ...req.body,
+      });
       if (!product) {
         return res.status(200).send("There is no Product with this Id");
       }
@@ -72,7 +71,7 @@ async function deleteProduct(req, res) {
   try {
     if (req.params.id) {
       const product = await Product.deleteOne({
-        _id: req.id,
+        _id: req.params.id,
       });
       if (!product) {
         return res.status(200).send("There is no Product with this Id");
