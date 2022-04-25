@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
-const validator = require("validator");
 
+function getFloat(value) {
+  return value && value["$numberDecimal"] ? value["$numberDecimal"] : 0;
+}
 let productSchema = new Schema(
   {
     serie: {
@@ -25,14 +27,14 @@ let productSchema = new Schema(
     },
     price: {
       type: mongoose.Decimal128,
-      required: true,
+      get: (v) => v.toString(),
     },
   },
   {
     timestamps: true,
   }
 );
-
+productSchema.set("toJSON", { getters: true });
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

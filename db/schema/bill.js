@@ -23,6 +23,7 @@ let billSchema = new Schema(
     },
     price: {
       type: mongoose.Decimal128,
+      get: (v) => v.toString(),
       required: true,
     },
     products: [
@@ -42,7 +43,7 @@ let billSchema = new Schema(
     timestamps: true,
   }
 );
-
+billSchema.set("toJSON", { getters: true });
 const Bill = mongoose.model("Bill", billSchema);
 
 module.exports = Bill;

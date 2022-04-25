@@ -7,10 +7,10 @@ const db = require("../db/connexion");
 async function index(req, res) {
   try {
     const listProducts = await Product.find().populate("serie");
-
     if (!listProducts) {
       return res.status(202).send("There is no Products");
     }
+
     res.status(200).send(listProducts);
   } catch (error) {
     res.status(404).send("This is error: " + error);
@@ -23,6 +23,7 @@ async function getByProductId(req, res) {
     if (!product) {
       return res.status(202).send("There is no Product with this Id");
     }
+
     res.status(200).send(product);
   } catch (error) {
     res.status(404).send("This is error: " + error);
