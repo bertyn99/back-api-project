@@ -28,7 +28,9 @@ async function getInvoiceById(req, res) {
 
 async function getInvoiceByUserId(req, res) {
   try {
-    const invoice = await Bill.find({ idUser: req.params.id });
+    const invoice = await Bill.find({ idUser: req.params.id }).populate(
+      "products.productId"
+    );
     if (!invoice) {
       return res.status(200).send("There is no Invoice with this Id");
     }
