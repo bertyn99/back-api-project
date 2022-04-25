@@ -38,7 +38,7 @@ async function addProduct(req, res) {
       price: req.body.price,
     });
     if (!product) {
-      return res.status(200).send("There is no Product with this Id");
+      return res.status(200).send("We cant ad this Product");
     }
     await product.save();
     res.status(200).send({ msg: "Product inserted", product });
