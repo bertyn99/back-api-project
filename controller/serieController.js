@@ -20,7 +20,7 @@ async function getBySerieId(req, res) {
   try {
     const serie = await Serie.findById(req.id);
 
-    if (!product) {
+    if (!serie) {
       return res.status(202).send("There is no Serie with this Id");
     }
     res.status(200).send(serie);
