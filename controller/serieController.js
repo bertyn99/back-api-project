@@ -11,7 +11,7 @@ async function index(req, res) {
     if (!listSeries) {
       return res.status(202).send("There is no Series");
     }
-    res.status(200).send(listSeries);
+    res.status(200).send({ msg: "list of series", data: listSeries });
   } catch (error) {
     res.status(404).send("This is error: " + error);
   }

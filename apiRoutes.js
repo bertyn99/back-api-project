@@ -2,6 +2,7 @@ const express = require("express");
 const user = require("./controller/userController");
 const verifyToken = require("./services/verifyToken");
 const products = require("./controller/productController");
+const serie = require("./controller/serieController");
 const invoice = require("./controller/factureController");
 exports.router = (function () {
   let apiRouter = express.Router();
@@ -38,6 +39,13 @@ exports.router = (function () {
   apiRouter.route("/products/:id/edit").patch(products.updateProduct);
   apiRouter.route("/products/:id/delete").delete(products.deleteProduct);
   apiRouter.route("/products").post(products.addProduct);
+
+  //serie routes
+  apiRouter.route("/serie").get(serie.index);
+  apiRouter.route("/serie/:id").get(serie.getBySerieId);
+  apiRouter.route("/serie/:id/edit").patch(serie.updateSerie);
+  apiRouter.route("/serie/:id/delete").delete(serie.deleteSerie);
+  apiRouter.route("/serie").post(serie.addSerie);
   //invoices routes
   apiRouter.route("/invoices").get(invoice.index);
   apiRouter.route("/invoices/:id").get(invoice.getInvoiceById);
