@@ -37,14 +37,14 @@ exports.router = (function () {
   apiRouter.route("/products/:id").get(products.getByProductId);
   apiRouter.route("/products/:id/edit").patch(products.updateProduct);
   apiRouter.route("/products/:id/delete").delete(products.deleteProduct);
-  apiRouter.route("/products/:id/add").post(products.addProduct);
+  apiRouter.route("/products").post(products.addProduct);
   //invoices routes
   apiRouter.route("/invoices").get(invoice.index);
   apiRouter.route("/invoices/:id").get(invoice.getInvoiceById);
   apiRouter.route("/invoices/user/:id").get(invoice.getInvoiceByUserId);
   apiRouter.route("/invoices/:id/edit").patch(invoice.updateInvoice);
   apiRouter.route("/invoices/:id/delete").delete(invoice.deleteInvoice);
-  apiRouter.route("/invoices/:id/add").post(invoice.addInvoice);
+  apiRouter.route("/invoices").post(invoice.addInvoice);
 
   return apiRouter;
 })();

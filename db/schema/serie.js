@@ -4,26 +4,23 @@ const jwt = require("jsonwebtoken");
 const Schema = mongoose.Schema;
 const validator = require("validator");
 
-let productSchema = new Schema(
+let serieSchema = new Schema(
   {
-    serie: {
+    name: {
       type: String,
       required: true,
+      trim: true,
     },
-    number: {
+    numberBook: {
       type: Number,
       required: true,
     },
-    stock: {
-      type: Number,
-      required: true,
-    },
-    cover: {
+    picture: {
       type: String,
       required: true,
     },
-    price: {
-      type: mongoose.Decimal128,
+    author: {
+      type: String,
       required: true,
     },
   },
@@ -32,6 +29,6 @@ let productSchema = new Schema(
   }
 );
 
-const Product = mongoose.model("Product", productSchema);
+const Serie = mongoose.model("Serie", serieSchema);
 
-module.exports = Product;
+module.exports = Serie;
