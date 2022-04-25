@@ -3,7 +3,7 @@ const user = require("./controller/userController");
 const verifyToken = require("./services/verifyToken");
 const products = require("./controller/productController");
 const serie = require("./controller/serieController");
-const invoice = require("./controller/factureController");
+const invoice = require("./controller/invoiceController");
 exports.router = (function () {
   let apiRouter = express.Router();
   // register user

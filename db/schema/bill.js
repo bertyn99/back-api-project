@@ -11,17 +11,15 @@ let billSchema = new Schema(
       required: true,
       ref: "User",
     },
-    emissionDate: {
-      type: Date,
-      required: true,
-    },
     isPaid: {
       type: Boolean,
       required: true,
+      default: true,
     },
     paidDate: {
       type: Date,
       required: true,
+      default: Date.now(),
     },
     price: {
       type: mongoose.Decimal128,
