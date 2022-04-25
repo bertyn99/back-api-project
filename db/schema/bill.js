@@ -27,8 +27,14 @@ let billSchema = new Schema(
     },
     products: [
       {
-        type: mongoose.ObjectId,
-        ref: "Product",
+        productId: {
+          type: mongoose.ObjectId,
+          ref: "Product",
+        },
+        qty: {
+          type: Number,
+          required: true,
+        },
       },
     ],
   },

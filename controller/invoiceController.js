@@ -15,7 +15,7 @@ async function index(req, res) {
 }
 async function getInvoiceById(req, res) {
   try {
-    const invoice = await Bill.findById(req.id);
+    const invoice = await Bill.findById(req.params.id);
 
     if (!invoice) {
       return res.status(202).send("There is no Invoice with this Id");
