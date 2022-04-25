@@ -13,7 +13,8 @@ async function register(req, res) {
     await user.save();
     //envoyer l'email de confirmation de création de compte
     const token = await user.generateAuthToken();
-    const { password, ...useWithoutPassword } = user;
+    const proxyUser = { ...user };
+    const { password, ...useWithoutPassword } = proxyUser;
     res.status(200).send({ user: useWithoutPassword, token });
   } catch (e) {
     console.log(e);
@@ -29,7 +30,8 @@ async function logIn(req, res) {
     );
 
     const token = await user.generateAuthToken();
-    const { password, ...useWithoutPassword } = user;
+    const proxyUser = { ...user };
+    const { password, ...useWithoutPassword } = proxyUser;
     res.send({ user: useWithoutPassword, token });
   } catch (e) {
     console.log(e);
