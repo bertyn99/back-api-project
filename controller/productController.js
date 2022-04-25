@@ -18,7 +18,7 @@ async function index(req, res) {
 }
 async function getByProductId(req, res) {
   try {
-    const product = await Product.findById(req.id);
+    const product = await Product.findById(req.params.id);
 
     if (!product) {
       return res.status(202).send("There is no Product with this Id");
