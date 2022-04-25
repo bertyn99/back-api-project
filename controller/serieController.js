@@ -53,13 +53,17 @@ async function updateSerie(req, res) {
     return res.status(401).send("Unauthorized to modify a Serie");
   try {
     if (req.params.id) {
-      const serie = await Serie.findByIdAndUpdate(req.params.id, ...req.body);
+      const serie = await Serie.findByIdAndUpdate(req.params.id, {
+        ...req.body,
+      });
+
       if (!serie) {
         return res.status(200).send("There is no Serie with this Id");
       }
       res.status(200).send({ msg: "Serie updated", serie });
     }
   } catch (error) {
+    console.log(error);
     res.status(404).send("This is error: " + error);
   }
 }
