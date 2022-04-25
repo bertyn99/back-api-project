@@ -9,6 +9,7 @@ let productSchema = new Schema(
     serie: {
       type: String,
       required: true,
+      ref: "Serie",
     },
     number: {
       type: Number,
