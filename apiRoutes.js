@@ -54,7 +54,7 @@ exports.router = (function () {
   //invoices routes
   apiRouter.route("/invoices").get(invoice.index);
   apiRouter.route("/invoices/:id").get(invoice.getInvoiceById);
-  apiRouter.route("/invoices/user/:id").get(invoice.getInvoiceByUserId);
+  apiRouter.route("/user/:id/invoices").get(invoice.getInvoiceByUserId);
   apiRouter.route("/invoices/:id/edit").patch(invoice.updateInvoice);
   apiRouter.route("/invoices/:id/delete").delete(invoice.deleteInvoice);
   apiRouter.route("/invoices").post(invoice.addInvoice);
