@@ -38,6 +38,7 @@ exports.router = (function () {
 
   //products routes
   apiRouter.route("/products").get(products.index);
+  apiRouter.route("/products/last").get(products.lastProduct);
   apiRouter.route("/products/:id").get(products.getByProductId);
   apiRouter
     .route("/products/:id/edit")

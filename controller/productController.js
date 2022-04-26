@@ -19,6 +19,24 @@ async function index(req, res) {
     res.status(404).send("This is error: " + error);
   }
 }
+async function lastProduct(req, res) {
+  try {
+    const listProducts = await Product.find()
+      .populate({
+        path: "serie",
+        select: { _id: 1, name: 1 },
+      })
+      .sort({ createdAt: -1 })
+      .limit(8);
+    if (!listProducts) {
+      return res.status(202).send("There is no Products");
+    }
+
+    res.status(200).send(listProducts);
+  } catch (error) {
+    res.status(404).send("This is error: " + error);
+  }
+}
 async function getByProductId(req, res) {
   try {
     const product = await Product.findById(req.params.id).populate("serie");
@@ -100,6 +118,7 @@ async function findSerie(req, res) {
 }
 module.exports = {
   index,
+  lastProduct,
   getByProductId,
   addProduct,
   updateProduct,
