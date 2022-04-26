@@ -91,6 +91,22 @@ async function deleteUser(req, res) {
   }
 }
 
+async function index(req, res) {
+  try {
+    const users = await User.find(req.params.id);
+
+    if (!users) {
+      return res.status(202).send("There is no user ");
+    }
+    const userWithoutTokAndPswd = users.map((user) => {
+      const { password, tokens, ...rest } = user._doc;
+      return rest;
+    });
+    res.status(200).send(userWithoutTokAndPswd);
+  } catch (error) {
+    res.status(404).send("This is error: " + error);
+  }
+}
 // Function
 /* async function registerUser(req, res) {
     if (!req.body.mail || !req.body.firstname || !req.body.lastname || !req.body.address || !req.body.city || !req.body.zip || !req.body.mobile || !req.body.password) {
@@ -123,6 +139,7 @@ async function deleteUser(req, res) {
 } */
 
 module.exports = {
+  index,
   register,
   logIn,
   logOut,

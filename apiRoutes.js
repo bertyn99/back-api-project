@@ -6,6 +6,9 @@ const serie = require("./controller/serieController");
 const invoice = require("./controller/invoiceController");
 exports.router = (function () {
   let apiRouter = express.Router();
+
+  //list of user controllers
+  apiRouter.get("/user", verifyToken, user.index);
   // register user
   apiRouter.route("/register").post(user.register);
 
