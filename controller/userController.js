@@ -62,6 +62,19 @@ async function myInfo(req, res) {
   }
 }
 
+async function reconnectUser(req, res) {
+  const token = req.body.token;
+  const user = await User.findByToken(token);
+
+  if (!user) {
+    return res.status(404).send("This is a wrong token");
+  }
+
+  const token2 = await user.generateAuthToken();
+  const { password, ...useWithoutPassword } = user._doc;
+  res.send({ user: useWithoutPassword, token: token2 });
+}
+
 async function updateInfo(req, res) {
   const allowedUpdates = ["name", "email", "password"];
   const updates = Object.keys(req.body);
@@ -145,4 +158,5 @@ module.exports = {
   logOut,
   myInfo,
   updateInfo,
+  reconnectUser,
 };

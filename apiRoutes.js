@@ -18,8 +18,8 @@ exports.router = (function () {
   // deconnection user
   apiRouter.route("/logout").post(verifyToken, user.logOut);
 
-  /*   // reconnect user
-    apiRouter.route("/reconnect").post(verifyToken, lastView, user.reconnectUser); */
+  // reconnect user
+  apiRouter.get("/reconnect").post(verifyToken, user.reconnectUser);
 
   // my info
   apiRouter.route("/user/:id").get(verifyToken, user.myInfo);
