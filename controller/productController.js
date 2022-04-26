@@ -6,7 +6,10 @@ const db = require("../db/connexion");
 
 async function index(req, res) {
   try {
-    const listProducts = await Product.find().populate("serie");
+    const listProducts = await Product.find().populate({
+      path: "serie",
+      select: { _id: 0, name: 1 },
+    });
     if (!listProducts) {
       return res.status(202).send("There is no Products");
     }
